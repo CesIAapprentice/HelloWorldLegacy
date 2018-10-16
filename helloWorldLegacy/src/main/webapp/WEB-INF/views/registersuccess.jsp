@@ -8,8 +8,8 @@ pageEncoding="UTF-8"%>
 <title>Register Success</title>
 </head>
 <body>
-<font color="green"><h1>Hello Java Coder</h1></font>
-<h2>${msg}</h2> You have successfully registered.
-<font color="green"><h1>You may now log in</h1></font>
+<h1><font color="green">Hello Java Coder</font></h1>
+<h2>${msg} You have successfully been registered.</h2> 
+<h2><font color="green">You may now <a href="login.jsp">log in</a></font></h2>
 </body>
 </html>

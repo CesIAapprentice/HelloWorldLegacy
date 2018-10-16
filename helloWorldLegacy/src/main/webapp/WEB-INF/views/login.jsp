@@ -28,6 +28,7 @@ pageEncoding="UTF-8"%>
 <div style="color: red">${error}</div>
 <div style="color: blue">${ok}</div>
 <div style="color: green">${mistake}</div>
+<div style="color: red">${"alreadyRegistered"}</div>
 </div>
 </form:form>
 </body>

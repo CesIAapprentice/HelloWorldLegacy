@@ -36,16 +36,15 @@ public class LoginController {
 		model.addAttribute("serverTime", formattedDate );
 		model.addAttribute("msg", "Please Enter Your Login Details");
 		
-		return "home";
+		return "login";
 	}
 	
-@RequestMapping(value = "/home", method = RequestMethod.GET)
-	  public String init(Model model) {
-	    model.addAttribute("msg", "Please Enter Your Login Details");
-	    return "home";
-	  }
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Model model) {
+		return "login";
+	}
 
-@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	  public String submit(Model model, @ModelAttribute("loginBean") LoginBean loginBean) {
 		  
 		  System.out.println(loginBean.getUserName());
@@ -53,18 +52,18 @@ public class LoginController {
 
 	    if (loginBean != null && loginBean.getUserName() != null & loginBean.getPassword() != null) {
 	      if ((loginBean.getUserName().equals("admin")) && (loginBean.getPassword().equals("admin"))) {
-	    	  //model.addAttribute("ok", "Nice Details");
+	    	  model.addAttribute("ok", "Nice Details");
 		      //return "home";
 	    	  
-	    	  model.addAttribute("msg", loginBean.getUserName());
+	    	  //model.addAttribute("msg", loginBean.getUserName());
 	    	  return "success";
 	      } else {
 	        model.addAttribute("error", "Invalid User: "+loginBean.getUserName()+ " and/or password: "+loginBean.getPassword());
-	        return "home";
+	        return "login";
 	      }
 	    } else {
 	      model.addAttribute("mistake", "Please enter Details");
-	      return "home";
+	      return "login";
 	    }
 	  }
 }
