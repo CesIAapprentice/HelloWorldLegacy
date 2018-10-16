@@ -6,11 +6,10 @@ public class User {
 	private Integer age;
 	private String email;
 	
-	public User(String name, Integer age, String email) {
-		super();
-		this.name = name;
-		this.age = age;
-		this.email = email;
+	public User() {
+		this.name = "";
+		this.age = 0;
+		this.email = "";
 	}
 
 	public String getName() {

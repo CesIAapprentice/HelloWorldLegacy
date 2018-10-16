@@ -6,9 +6,8 @@ public class DDBB {
 	
 	ArrayList<User> userdatabase = new ArrayList<User>();
 
-	public DDBB(ArrayList<User> userdatabase) {
-		super();
-		this.userdatabase = userdatabase;
+	public DDBB() {
+		this.userdatabase = new ArrayList<User>();
 	}
 
 	public ArrayList<User> getUserdatabase() {
