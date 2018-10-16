@@ -21,9 +21,6 @@ public class RegisterController {
 		  String userEmail = registerBean.getEmail();
 
 	    if (registerBean != null && registerBean.getName() != null & registerBean.getAge() != null & registerBean.getEmail() != null) {
-	    	//if ((registerBean.getUserName().equals("admin")) && (registerBean.getPassword().equals("admin"))) {
-	    	  //model.addAttribute("ok", "Nice Details");
-		      //return "home";
 	    	
 	    	thisuser.setName(userName);
 	    	thisuser.setAge(userAge);
