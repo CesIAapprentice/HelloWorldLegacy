@@ -1,32 +1,32 @@
 package net.java.spring;
 
 public class User {
-	
-	private String name;
-	private Integer age;
-	private String email;
-	
+	   private String username;
+	   private String password;
+	   private String email;
+	   
+	public User() {}
 
-	public User(String name, Integer age, String email) {
-		this.name = name;
-		this.age = age;
-		this.email = email;
+	   public User(String name, String password, String email) {
+	       this.username = name;
+	       this.password = password;
+	       this.email = email;
+	   }
+
+	public String getUsername() {
+		return username;
 	}
 
-	public String getName() {
-		return name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getPassword() {
+		return password;
 	}
 
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
@@ -36,36 +36,5 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = name.hashCode();
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		return true;
-	}
-	
-	
-	
-	
-	
-	
-
 }
+

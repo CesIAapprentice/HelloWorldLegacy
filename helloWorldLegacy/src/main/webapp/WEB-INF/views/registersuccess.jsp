@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <h1><font color="green">Hello Java Coder</font></h1>
-<h2>${msg} You have successfully been registered.</h2> 
+<h2>${registerSuccess} You have successfully been registered.</h2> 
 <h2><font color="green">You may now <a href="login.jsp">log in</a></font></h2>
 </body>
 </html>
