@@ -13,15 +13,15 @@ pageEncoding="UTF-8"%>
 <table>
 <tr>
 <td><label >Username</label></td>
-<td><input type="text" name="userName" /></td>
+<td><input type="text" name="username" /></td>
 </tr>
 <tr>
 <td><label >Password</label></td>
-<td><input type="password" name="userPassword" /></td>
+<td><input type="password" name="password" /></td>
 </tr>
 <tr>
 <td><label >Email</label></td>
-<td><input type="text" name="userEmail" /></td>
+<td><input type="text" name="email" /></td>
 </tr>
 <tr>
 <td></td>

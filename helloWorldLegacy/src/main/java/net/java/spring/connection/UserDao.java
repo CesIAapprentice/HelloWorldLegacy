@@ -1,9 +1,13 @@
 package net.java.spring.connection;
-import net.java.spring.User;
+import java.sql.SQLException;
+
+import net.java.spring.LoginBean;
+import net.java.spring.UserBean;
 
 public interface UserDao {
-	   User getUser(String username);
-	   boolean insertUser(User user);
-	   boolean isUserInDatabase(String username);
-	   boolean isLoginCorrect(String username, String password);
+	
+	   void insertUser(UserBean register)throws SQLException;
+	   UserBean validateNewUser(LoginBean loginBean) throws SQLException;
+
+		
 }
