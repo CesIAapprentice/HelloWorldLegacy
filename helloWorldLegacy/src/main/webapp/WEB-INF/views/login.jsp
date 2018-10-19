@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
 <table>
 <tr>
 <td><label >User Name</label></td>
-<td><input type="text" name="userName" /></td>
+<td><input type="text" name="username" /></td>
 </tr>
 <tr>
 <td><label >Password</label></td>
@@ -25,10 +25,9 @@ pageEncoding="UTF-8"%>
 <td><input type="submit" value="Submit" /></td>
 </tr>
 </table>
-<div style="color: red">${error}</div>
-<div style="color: blue">${ok}</div>
-<div style="color: green">${mistake}</div>
-<div style="color: red">${"alreadyRegistered"}</div>
+<div style="color: red">${loginError}</div>
+<div style="color: red">${userNotFound}</div>
+<div style="color: red">You may want to <a href="register">register</a> first</div>
 </div>
 </form:form>
 </body>
