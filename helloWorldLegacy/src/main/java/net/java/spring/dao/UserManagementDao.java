@@ -5,7 +5,10 @@ import java.sql.SQLException;
 import net.java.spring.model.LoginBean;
 import net.java.spring.model.RegisterUserBean;
 
-public interface LoginDao {
+public interface UserManagementDao {
+	
 	LoginBean validateNewUser(LoginBean loginBean) throws SQLException;
-	LoginBean isUserInDatabase(LoginBean loginBean) throws SQLException;
+	void insertUser(RegisterUserBean register)throws SQLException;
+	LoginBean isUserInDatabase(String username) throws SQLException;
+	
 }

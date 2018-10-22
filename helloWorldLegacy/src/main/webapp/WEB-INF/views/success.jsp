@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
 <font color="green"><h1>Hello Java Coder</h1></font>
-<h2>${msg}</h2> You have successfully logged in.
+<h2>${loginSuccessfull}</h2> You have successfully logged in.
 <font color="green"><h1>Welcome to Spring world !</h1></font>
 </body>
 </html>

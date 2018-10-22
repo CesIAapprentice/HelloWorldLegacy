@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.java.spring.model.RegisterUserBean;
-import net.java.spring.service.RegisterUserService;
-import net.java.spring.service.RegisterUserServiceImplement;
+import net.java.spring.service.UserManagementService;
+import net.java.spring.service.UserManagementServiceImplement;
 
 @Controller
 public class RegisterUserController {
 	
-	RegisterUserService registerUserService;
+	private UserManagementService userManagementService;
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public ModelAndView registerGET(HttpServletRequest request, HttpServletResponse response) {
@@ -30,10 +30,19 @@ public class RegisterUserController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView registerPOST(HttpServletRequest request, HttpServletResponse response,
 										@ModelAttribute("register") RegisterUserBean register) throws SQLException {
-		this.registerUserService = new RegisterUserServiceImplement();
-		registerUserService.insertUser(register);
-		ModelAndView mav = new ModelAndView("registersuccess");
-		mav.addObject("registerSuccess", register.getUsername());
-		return mav;
+		
+		this.userManagementService = new UserManagementServiceImplement();
+		
+		if(userManagementService.isUserInDatabase(register.getUsername()) == null) {
+			userManagementService.insertUser(register);
+			ModelAndView mav = new ModelAndView("registersuccess");
+			mav.addObject("registerSuccess", register.getUsername());
+			return mav;
+		} else {
+			ModelAndView mav = new ModelAndView("register");
+			mav.addObject("register", register.getUsername());
+			mav.addObject("userAlreadyInDatabase","User already in database");
+			return mav;
+		}
 	}
 }

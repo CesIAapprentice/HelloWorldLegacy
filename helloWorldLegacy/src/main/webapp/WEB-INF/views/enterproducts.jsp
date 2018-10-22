@@ -6,32 +6,31 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Spring Register Form</title>
+<title>Enter Products Form</title>
 </head>
 <body>
+<div align="center"> Welcome ${enterproducts}. You may now enter products</div>
+<br>
 <form:form name="registerForm" method="POST"  >
 <div align="center">
 <table>
 <tr>
-<td><label >Username</label></td>
-<td><input type="text" name="username" /></td>
+<td><label >ID</label></td>
+<td><input type="text" name="id" /></td>
 </tr>
 <tr>
-<td><label >Password</label></td>
-<td><input type="password" name="password" /></td>
+<td><label >Name</label></td>
+<td><input type="password" name="name" /></td>
 </tr>
 <tr>
-<td><label >Email</label></td>
-<td><input type="text" name="email" /></td>
+<td><label >Price</label></td>
+<td><input type="text" name="price" /></td>
 </tr>
 <tr>
 <td></td>
 <td><input type="submit" value="Submit" /></td>
 </tr>
 </table>
-<c:if test="${userAlreadyInDatabase != null}"> 
-	<div style="color: red">${userAlreadyInDatabase}. You may want to <a href="login">login</a> instead.</div>
-</c:if>
 </div>
 </form:form>
 </body>
