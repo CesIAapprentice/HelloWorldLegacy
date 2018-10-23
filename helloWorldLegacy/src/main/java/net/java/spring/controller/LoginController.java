@@ -36,11 +36,13 @@ public class LoginController {
 		// if user and password matches DB
 		if(userManagementService.validateNewUser(login) != null) {
 			
+			// User Storehouse get to his own home
 			if(login.getUsername().equals("Storehouse")) {
 				ModelAndView mav = new ModelAndView("enterproducts");
 				mav.addObject("enterproducts", login.getUsername());
 				return mav;
 			} else {
+				// Any other user gets to main home
 				ModelAndView mav = new ModelAndView("success");
 				mav.addObject("loginSuccessfull", login.getUsername());
 				return mav;

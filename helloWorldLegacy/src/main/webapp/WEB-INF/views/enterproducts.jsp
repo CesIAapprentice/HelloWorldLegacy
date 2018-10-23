@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
 <body>
 <div align="center"> Welcome ${enterproducts}. You may now enter products</div>
 <br>
-<form:form name="registerForm" method="POST"  >
+<form:form name="enterProductsForm" method="POST"  >
 <div align="center">
 <table>
 <tr>
@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
 </tr>
 <tr>
 <td><label >Name</label></td>
-<td><input type="password" name="name" /></td>
+<td><input type="text" name="name" /></td>
 </tr>
 <tr>
 <td><label >Price</label></td>
@@ -31,6 +31,12 @@ pageEncoding="UTF-8"%>
 <td><input type="submit" value="Submit" /></td>
 </tr>
 </table>
+<c:if test="${IDSuccessfullyAdded != null}"> 
+	<div style="color: red">${IDSuccessfullyAdded}</div>
+</c:if>
+<c:if test="${IDAlreadyInDatabase != null}"> 
+	<div style="color: red">${IDAlreadyInDatabase}</div>
+</c:if>
 </div>
 </form:form>
 </body>

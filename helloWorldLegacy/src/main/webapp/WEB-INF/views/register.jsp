@@ -30,7 +30,10 @@ pageEncoding="UTF-8"%>
 </tr>
 </table>
 <c:if test="${userAlreadyInDatabase != null}"> 
-	<div style="color: red">${userAlreadyInDatabase}. You may want to <a href="login">login</a> instead.</div>
+	<div style="color: blue">${IDAlreadyInDatabase}. You may <a href="login">login</a> instead</div>
+</c:if>
+<c:if test="${registerSuccess != null}"> 
+	<div style="color: red">${registerSuccess} successfully added. You may <a href="login">login</a> now</div>
 </c:if>
 </div>
 </form:form>
