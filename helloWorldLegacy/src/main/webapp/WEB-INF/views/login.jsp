@@ -9,7 +9,8 @@ pageEncoding="UTF-8"%>
 <title>Spring Login Form</title>
 </head>
 <body>
-<P>  The time on the server is ${serverTime}. </P>
+<div align="center">You may now Log in</div>
+<br>
 <form:form name="submitForm" method="POST"  >
 <div align="center">
 <table>

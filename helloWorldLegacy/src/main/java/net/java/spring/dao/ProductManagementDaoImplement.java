@@ -2,6 +2,8 @@ package net.java.spring.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +12,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import net.java.spring.model.EnterNewProductBean;
 import net.java.spring.model.LoginBean;
+import net.java.spring.model.ProductModel;
 
 public class ProductManagementDaoImplement implements ProductManagementDao{
 
@@ -52,5 +55,29 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 				return null;
 			}
 		});
-	}	
+	}
+
+	@Override
+	public List<ProductModel> getAllProducts() throws SQLException {
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		dataSource.setDriver(new com.mysql.jdbc.Driver());
+		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
+		dataSource.setUsername("root");
+		dataSource.setPassword("");
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		String sqlGetAllProducts = "SELECT * FROM products";
+		return jdbcTemplate.query(sqlGetAllProducts, new ResultSetExtractor<List<ProductModel>>() {
+			 
+			@Override
+			public List<ProductModel> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				List<ProductModel> productList = new ArrayList<ProductModel>();
+				if (rs.next()) {
+					productList.add(new ProductModel(rs.getString(1), rs.getString(2), rs.getInt(3)));
+				}
+			return productList;
+			}	
+		});
+	}
 }

@@ -9,7 +9,7 @@ pageEncoding="UTF-8"%>
 <title>Enter Products Form</title>
 </head>
 <body>
-<div align="center"> Welcome ${enterproducts}. You may now enter products</div>
+<div align="center"> Welcome Storehouse. You may now enter products</div>
 <br>
 <form:form name="enterProductsForm" method="POST"  >
 <div align="center">

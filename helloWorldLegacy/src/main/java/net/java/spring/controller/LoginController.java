@@ -29,7 +29,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginPOST(HttpServletRequest request, HttpServletResponse response,
+	public String loginPOST(HttpServletRequest request, HttpServletResponse response,
 										@ModelAttribute("login") LoginBean login) throws SQLException {
 		this.userManagementService = new UserManagementServiceImplement();
 		
@@ -38,33 +38,22 @@ public class LoginController {
 			
 			// User Storehouse get to his own home
 			if(login.getUsername().equals("Storehouse")) {
-				ModelAndView mav = new ModelAndView("enterproducts");
-				mav.addObject("enterproducts", login.getUsername());
-				return mav;
+				return "redirect:/enterproducts";
 			} else {
 				// Any other user gets to main home
-				ModelAndView mav = new ModelAndView("success");
-				mav.addObject("loginSuccessfull", login.getUsername());
-				return mav;
+				return "redirect:/displayproducts";
 			}
-			
 		}
 		
 		// if user and password doesn't match DB but user exists in DB
 		if(userManagementService.validateNewUser(login) == null && 
 				userManagementService.isUserInDatabase(login.getUsername()) != null) {
-			ModelAndView mav = new ModelAndView("login");
-			mav.addObject("login", "login incorrect");
-			mav.addObject("loginError", "wrong username and/or password. Please try again.");
-			return mav;
+			return "redirect:/login";
 		}
 		
 		// if user not found in DB
 		if(userManagementService.isUserInDatabase(login.getUsername()) == null) {
-			ModelAndView mav = new ModelAndView("login");
-			mav.addObject("login", new LoginBean());
-			mav.addObject("userNotFound", "User not found.");
-			return mav;
+			return "redirect:/register";
 		}
 		return null;
 	}
