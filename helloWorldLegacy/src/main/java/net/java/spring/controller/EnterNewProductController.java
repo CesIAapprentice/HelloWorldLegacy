@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import net.java.spring.model.EnterNewProductBean;
-import net.java.spring.service.EnterNewProductService;
-import net.java.spring.service.EnterNewProductServiceImplement;
+import net.java.spring.service.ProductManagementService;
+import net.java.spring.service.ProductManagementServiceImplement;
 
 @Controller
 public class EnterNewProductController {
 	
-private EnterNewProductService enterNewProductService;
+	private ProductManagementService productManagementService;
 	
 	@RequestMapping(value = "/enterproducts", method = RequestMethod.GET)
 	public ModelAndView enterNewProductGET(HttpServletRequest request, HttpServletResponse response) {
@@ -32,10 +32,10 @@ private EnterNewProductService enterNewProductService;
 	public ModelAndView enterNewProductPOST(HttpServletRequest request, HttpServletResponse response,
 										@ModelAttribute("enterproducts") EnterNewProductBean enterproduct) throws SQLException {
 		
-		this.enterNewProductService = new EnterNewProductServiceImplement();
+		this.productManagementService = new ProductManagementServiceImplement();
 		
-		if(enterNewProductService.isIDinProductDatabase(enterproduct.getId()) == null) {
-			enterNewProductService.insertProduct(enterproduct);
+		if(this.productManagementService.isIDinProductDatabase(enterproduct.getId()) == null) {
+			this.productManagementService.insertProduct(enterproduct);
 			ModelAndView mav = new ModelAndView("enterproducts");
 			mav.addObject("IDSuccessfullyAdded","ID successfully added.");
 			return mav;

@@ -73,10 +73,34 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 			@Override
 			public List<ProductModel> extractData(ResultSet rs) throws SQLException, DataAccessException {
 				List<ProductModel> productList = new ArrayList<ProductModel>();
-				if (rs.next()) {
+				while (rs.next()) {
 					productList.add(new ProductModel(rs.getString(1), rs.getString(2), rs.getInt(3)));
 				}
+			
 			return productList;
+			}	
+		});
+	}
+
+	@Override
+	public ProductModel getProduct(String id) throws SQLException {
+		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+		dataSource.setDriver(new com.mysql.jdbc.Driver());
+		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
+		dataSource.setUsername("root");
+		dataSource.setPassword("");
+
+		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+		
+		String sqlGetProduct = "SELECT * FROM products WHERE id='" + id + "'";
+		return jdbcTemplate.query(sqlGetProduct, new ResultSetExtractor<ProductModel>() {
+			 
+			@Override
+			public ProductModel extractData(ResultSet rs) throws SQLException, DataAccessException {
+				while (rs.next()) {
+					return new ProductModel(rs.getString(1), rs.getString(2), rs.getInt(3));
+				}
+				return null;
 			}	
 		});
 	}

@@ -20,9 +20,15 @@
 				<td>${product.id }</td>
 				<td>${product.name }</td>
 				<td>${product.price }</td>
+				<td align="center">
+					<a href="${pageContext.request.contextPath }/cart/add/${product.id}">Add to Cart</a>
+				</td>
+				
 			</tr>
 		</c:forEach>
 	</table>
+<br>	
+<div>Products in Cart: ${productsInCart}</div>
 
 </body>
 </html>

@@ -10,6 +10,7 @@ public interface ProductManagementDao {
 	
 	public void insertProduct (EnterNewProductBean productBean) throws SQLException;
 	public EnterNewProductBean isIDinProductDatabase(String id) throws SQLException;
+	public ProductModel getProduct(String id) throws SQLException;
 	public List<ProductModel> getAllProducts () throws SQLException;
 
 }
