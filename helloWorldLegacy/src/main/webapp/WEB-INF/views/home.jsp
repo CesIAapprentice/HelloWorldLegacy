@@ -16,7 +16,7 @@ pageEncoding="UTF-8"%>
 <P>  The time on the server is ${serverTime}. </P>
 <div style="color: blue">${msg}</div>
 
-<P>  You may <a href="login">Login</a> , <a href="register">Register</a> or <a href="enterproducts">Enter Products</a></P>
+<P>  You may <a href="login">Login</a> or <a href="register">Register</a></P>
 
 </div>
 </body>

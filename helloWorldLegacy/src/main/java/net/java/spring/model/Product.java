@@ -1,11 +1,11 @@
 package net.java.spring.model;
 
-public class ProductModel {
+public class Product {
 	
 	private String id, name;
 	private Integer price;
 	
-	public ProductModel(String id, String name, Integer price) {
+	public Product(String id, String name, Integer price) {
 		super();
 		this.id = id;
 		this.name = name;

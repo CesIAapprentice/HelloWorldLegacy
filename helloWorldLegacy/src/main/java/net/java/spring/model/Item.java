@@ -2,14 +2,14 @@ package net.java.spring.model;
 
 public class Item {
 
-	private ProductModel product;
+	private Product product;
 	private int quantity;
 
-	public ProductModel getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 
-	public void setProduct(ProductModel product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 
@@ -24,7 +24,7 @@ public class Item {
 	public Item() {
 	}
 
-	public Item(ProductModel product, int quantity) {
+	public Item(Product product, int quantity) {
 		this.product = product;
 		this.quantity = quantity;
 	}

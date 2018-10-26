@@ -3,28 +3,30 @@ package net.java.spring.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import net.java.spring.dao.ProductManagementDao;
+import net.java.spring.dao.ProductManagementDaoImplement;
 import net.java.spring.model.EnterNewProductBean;
-import net.java.spring.model.ProductModel;
+import net.java.spring.model.Product;
 
 public class ProductManagementServiceImplement implements ProductManagementService {
 	
-	ProductManagementService productManagementService;
+	ProductManagementDao productManagementDao;
 	
 	public void insertProduct (EnterNewProductBean productBean) throws SQLException{
-		this.productManagementService = new ProductManagementServiceImplement();
-		this.productManagementService.insertProduct(productBean);
+		this.productManagementDao = new ProductManagementDaoImplement();
+		this.productManagementDao.insertProduct(productBean);
 	}
 	public EnterNewProductBean isIDinProductDatabase(String id) throws SQLException{
-		this.productManagementService = new ProductManagementServiceImplement();
-		return this.productManagementService.isIDinProductDatabase(id);
+		this.productManagementDao = new ProductManagementDaoImplement();
+		return this.productManagementDao.isIDinProductDatabase(id);
 	}
-	public ProductModel getProduct(String id) throws SQLException{
-		this.productManagementService = new ProductManagementServiceImplement();
-		return this.productManagementService.getProduct(id);
+	public Product getProduct(String id) throws SQLException{
+		this.productManagementDao = new ProductManagementDaoImplement();
+		return this.productManagementDao.getProduct(id);
 	}
-	public List<ProductModel> getAllProducts () throws SQLException{
-		this.productManagementService = new ProductManagementServiceImplement();
-		return this.productManagementService.getAllProducts();
+	public List<Product> getAllProducts () throws SQLException{
+		this.productManagementDao = new ProductManagementDaoImplement();
+		return this.productManagementDao.getAllProducts();
 	}
 
 }

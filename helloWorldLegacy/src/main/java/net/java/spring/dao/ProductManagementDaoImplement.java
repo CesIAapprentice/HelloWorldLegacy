@@ -12,7 +12,7 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import net.java.spring.model.EnterNewProductBean;
 import net.java.spring.model.LoginBean;
-import net.java.spring.model.ProductModel;
+import net.java.spring.model.Product;
 
 public class ProductManagementDaoImplement implements ProductManagementDao{
 
@@ -58,7 +58,7 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 	}
 
 	@Override
-	public List<ProductModel> getAllProducts() throws SQLException {
+	public List<Product> getAllProducts() throws SQLException {
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		dataSource.setDriver(new com.mysql.jdbc.Driver());
 		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
@@ -68,13 +68,13 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		String sqlGetAllProducts = "SELECT * FROM products";
-		return jdbcTemplate.query(sqlGetAllProducts, new ResultSetExtractor<List<ProductModel>>() {
+		return jdbcTemplate.query(sqlGetAllProducts, new ResultSetExtractor<List<Product>>() {
 			 
 			@Override
-			public List<ProductModel> extractData(ResultSet rs) throws SQLException, DataAccessException {
-				List<ProductModel> productList = new ArrayList<ProductModel>();
+			public List<Product> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				List<Product> productList = new ArrayList<Product>();
 				while (rs.next()) {
-					productList.add(new ProductModel(rs.getString(1), rs.getString(2), rs.getInt(3)));
+					productList.add(new Product(rs.getString(1), rs.getString(2), rs.getInt(3)));
 				}
 			
 			return productList;
@@ -83,7 +83,7 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 	}
 
 	@Override
-	public ProductModel getProduct(String id) throws SQLException {
+	public Product getProduct(String id) throws SQLException {
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		dataSource.setDriver(new com.mysql.jdbc.Driver());
 		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
@@ -93,12 +93,12 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 		
 		String sqlGetProduct = "SELECT * FROM products WHERE id='" + id + "'";
-		return jdbcTemplate.query(sqlGetProduct, new ResultSetExtractor<ProductModel>() {
+		return jdbcTemplate.query(sqlGetProduct, new ResultSetExtractor<Product>() {
 			 
 			@Override
-			public ProductModel extractData(ResultSet rs) throws SQLException, DataAccessException {
-				while (rs.next()) {
-					return new ProductModel(rs.getString(1), rs.getString(2), rs.getInt(3));
+			public Product extractData(ResultSet rs) throws SQLException, DataAccessException {
+				if (rs.next()) {
+					return new Product(rs.getString(1), rs.getString(2), rs.getInt(3));
 				}
 				return null;
 			}	
