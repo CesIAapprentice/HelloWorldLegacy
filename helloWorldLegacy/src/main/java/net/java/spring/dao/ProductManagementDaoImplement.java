@@ -17,7 +17,7 @@ import net.java.spring.model.Product;
 public class ProductManagementDaoImplement implements ProductManagementDao{
 
 	@Override
-	public void insertProduct(EnterNewProductBean productBean) throws SQLException {
+	public void insertProduct(Product product) throws SQLException {
 		SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 		dataSource.setDriver(new com.mysql.jdbc.Driver());
 		dataSource.setUrl("jdbc:mysql://localhost:3306/test");
@@ -27,7 +27,7 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
 		String sqlInsert = "INSERT INTO products (id, name, price)" + " VALUES (?, ?, ?)";
-		jdbcTemplate.update(sqlInsert, productBean.getId(), productBean.getName(), productBean.getPrice());	
+		jdbcTemplate.update(sqlInsert, product.getId(), product.getName(), product.getPrice());	
 	}
 
 	@Override
@@ -74,7 +74,12 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 			public List<Product> extractData(ResultSet rs) throws SQLException, DataAccessException {
 				List<Product> productList = new ArrayList<Product>();
 				while (rs.next()) {
-					productList.add(new Product(rs.getString(1), rs.getString(2), rs.getInt(3)));
+					Product temp = new Product();
+					temp.setId(rs.getString(1));
+					temp.setName(rs.getString(2));
+					temp.setPrice(rs.getInt(3));
+					productList.add(temp);
+					
 				}
 			
 			return productList;
@@ -98,7 +103,11 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 			@Override
 			public Product extractData(ResultSet rs) throws SQLException, DataAccessException {
 				if (rs.next()) {
-					return new Product(rs.getString(1), rs.getString(2), rs.getInt(3));
+					Product temp = new Product();
+					temp.setId(rs.getString(1));
+					temp.setName(rs.getString(2));
+					temp.setPrice(rs.getInt(3));
+					return temp;
 				}
 				return null;
 			}	

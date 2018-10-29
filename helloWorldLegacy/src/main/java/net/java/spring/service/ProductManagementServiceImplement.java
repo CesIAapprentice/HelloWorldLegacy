@@ -12,9 +12,9 @@ public class ProductManagementServiceImplement implements ProductManagementServi
 	
 	ProductManagementDao productManagementDao;
 	
-	public void insertProduct (EnterNewProductBean productBean) throws SQLException{
+	public void insertProduct (Product product) throws SQLException{
 		this.productManagementDao = new ProductManagementDaoImplement();
-		this.productManagementDao.insertProduct(productBean);
+		this.productManagementDao.insertProduct(product);
 	}
 	public EnterNewProductBean isIDinProductDatabase(String id) throws SQLException{
 		this.productManagementDao = new ProductManagementDaoImplement();

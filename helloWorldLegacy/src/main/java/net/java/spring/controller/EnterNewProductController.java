@@ -2,47 +2,68 @@ package net.java.spring.controller;
 
 import java.sql.SQLException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
-import net.java.spring.model.EnterNewProductBean;
+import net.java.spring.model.Product;
 import net.java.spring.service.ProductManagementService;
-import net.java.spring.service.ProductManagementServiceImplement;
 
 @Controller
+@SessionAttributes("product")
 public class EnterNewProductController {
 	
 	private ProductManagementService productManagementService;
 	
-	@RequestMapping(value = "/enterproducts", method = RequestMethod.GET)
-	public ModelAndView enterNewProductGET(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("enterproducts");
-		System.out.println("Hola");
-		mav.addObject("enterproducts", new EnterNewProductBean());
-		return mav;
-	}
+	@RequestMapping(value="enterproducts", method = RequestMethod.GET)
+    public String setupForm(Model model)
+    {
+         Product product = new Product();
+         model.addAttribute("product", product);
+         return "enterproducts";
+    }
 	
-	@RequestMapping(value = "/enterproducts", method = RequestMethod.POST)
-	public ModelAndView enterNewProductPOST(HttpServletRequest request, HttpServletResponse response,
-										@ModelAttribute("enterproducts") EnterNewProductBean enterproduct) throws SQLException {
-		
-		this.productManagementService = new ProductManagementServiceImplement();
-		
-		if(this.productManagementService.isIDinProductDatabase(enterproduct.getId()) == null) {
-			this.productManagementService.insertProduct(enterproduct);
-			ModelAndView mav = new ModelAndView("enterproducts");
-			mav.addObject("IDSuccessfullyAdded","ID successfully added.");
-			return mav;
-		} else {
-			ModelAndView mav = new ModelAndView("enterproducts");
-			mav.addObject("IDAlreadyInDatabase","ID already in database.");
-			return mav;
-		}
-	}
+	@RequestMapping(value="enterproducts", method = RequestMethod.POST)
+	public String submitForm(@ModelAttribute("product") Product product, BindingResult result, SessionStatus status) throws SQLException
+    {
+        //Validation code start
+        boolean error = false;
+         
+        System.out.println(product); //Verifying if information is same as input by user
+         
+        if(product.getId().isEmpty()){
+            result.rejectValue("id", "error.emptyID");
+            error = true;
+        }
+        
+        if(productManagementService.isIDinProductDatabase(product.getId()) == null) {
+            result.rejectValue("id", "error.iDalreadyAdded");
+            error = true;
+        }
+         
+        if(product.getName().isEmpty()){
+            result.rejectValue("name", "error.name");
+            error = true;
+        }
+         
+        if(product.getPrice().toString().isEmpty()){
+            result.rejectValue("price", "error.price");
+            error = true;
+        }
+         
+        if(error) {
+            return "enterproducts";
+        }
+        status.setComplete();
+        productManagementService.insertProduct(product);
+        return "redirect:enterproducts";
+        // mensaje de OK
+        
+    }
+
 }
