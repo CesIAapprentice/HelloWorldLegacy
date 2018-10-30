@@ -44,15 +44,16 @@
                 <td><form:errors path="price" cssClass="error" /></td>
             </tr>
             <tr>
+                 <td><label for="image">Product Images: </label></td>
+                 <td><input type="file" name="images" multiple="multiple"/></td>
+            </tr>
+            <tr>
                 <td colspan="3"><input type="submit" value="Add Product"/></td>
             </tr>
         </table>
 
 <c:if test="${IDSuccessfullyAdded != null}"> 
 	<div style="color: red">${IDSuccessfullyAdded}</div>
-</c:if>
-<c:if test="${IDAlreadyInDatabase != null}"> 
-	<div style="color: red">${IDAlreadyInDatabase}</div>
 </c:if>
 </div>
 </form:form>

@@ -1,9 +1,23 @@
 package net.java.spring.model;
 
-public class Product {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class Product implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private String id, name;
 	private Integer price;
+	private List<MultipartFile> images;
+	private String imagesnames;
+
 
 	public String getId() {
 		return id;
@@ -23,6 +37,21 @@ public class Product {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
+	public List<MultipartFile> getImages() {
+		return images;
+	}
+	public void setImages(List<MultipartFile> images) {
+		this.images = images;
+	}
+	public String getImagesnames() {
+		return imagesnames;
+	}
+	public void setImagesnames(String imagesnames) {
+		this.imagesnames = imagesnames;
+	}
+	
+	
+	
 	
 	
 

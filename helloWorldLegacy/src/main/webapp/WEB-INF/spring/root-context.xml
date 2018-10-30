@@ -6,9 +6,10 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
 	<bean id="messageSource" 
-	class="org.springframework.context.support.ResourceBundleMessageSource">
+		class="org.springframework.context.support.ResourceBundleMessageSource">
        		<property name="basename" value="messages" />
-    	</bean>
-	
-		
+    </bean>
+    
+    <bean id="multipartResolver"   
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 </beans>

@@ -1,6 +1,12 @@
 package net.java.spring.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 
+import net.java.spring.model.EnterNewProductBean;
 import net.java.spring.model.Product;
 import net.java.spring.service.ProductManagementService;
+import net.java.spring.service.ProductManagementServiceImplement;
 
 @Controller
 @SessionAttributes("product")
@@ -29,8 +38,10 @@ public class EnterNewProductController {
     }
 	
 	@RequestMapping(value="enterproducts", method = RequestMethod.POST)
-	public String submitForm(@ModelAttribute("product") Product product, BindingResult result, SessionStatus status) throws SQLException
+	public String submitForm(@ModelAttribute("product") Product product, BindingResult result, SessionStatus status, HttpServletRequest servletRequest, Model model) throws SQLException
     {
+		this.productManagementService = new ProductManagementServiceImplement();
+
         //Validation code start
         boolean error = false;
          
@@ -41,7 +52,7 @@ public class EnterNewProductController {
             error = true;
         }
         
-        if(productManagementService.isIDinProductDatabase(product.getId()) == null) {
+        if(productManagementService.isIDinProductDatabase(product.getId()) != null) {
             result.rejectValue("id", "error.iDalreadyAdded");
             error = true;
         }
@@ -51,7 +62,7 @@ public class EnterNewProductController {
             error = true;
         }
          
-        if(product.getPrice().toString().isEmpty()){
+        if(product.getPrice() == null){
             result.rejectValue("price", "error.price");
             error = true;
         }
@@ -59,6 +70,38 @@ public class EnterNewProductController {
         if(error) {
             return "enterproducts";
         }
+        
+      //Get the uploaded files and store them
+        List<MultipartFile> files = product.getImages();
+        List<String> fileNames = new ArrayList<String>();
+        
+        if (null != files && files.size() > 0)
+        {
+            for (MultipartFile multipartFile : files) {
+ 
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+                for(String filename : fileNames) {
+                	product.getImagesnames().concat(fileName);
+                	product.getImagesnames().concat(";");
+                }
+                System.out.println("Productos: " + product.getImagesnames());
+ 
+                @SuppressWarnings("deprecation")
+				File imageFile = new File(servletRequest.getRealPath("/images"), fileName);
+                try
+                {
+                    multipartFile.transferTo(imageFile);
+                } catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+ 
+        // Here, you can save the product details in database
+        
+        
         status.setComplete();
         productManagementService.insertProduct(product);
         return "redirect:enterproducts";

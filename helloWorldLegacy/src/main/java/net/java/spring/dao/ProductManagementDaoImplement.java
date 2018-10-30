@@ -26,8 +26,8 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
 
-		String sqlInsert = "INSERT INTO products (id, name, price)" + " VALUES (?, ?, ?)";
-		jdbcTemplate.update(sqlInsert, product.getId(), product.getName(), product.getPrice());	
+		String sqlInsert = "INSERT INTO products (id, name, price, images)" + " VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sqlInsert, product.getId(), product.getName(), product.getPrice(), product.getImagesnames());	
 	}
 
 	@Override
