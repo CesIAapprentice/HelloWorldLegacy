@@ -24,7 +24,7 @@
 <body>
 <h2><spring:message code="lbl.page" text="Welcome Storehouse. You may now enter products" /></h2>
 <br/>
-<form:form method="post" modelAttribute="product">
+<form:form commandName="product" action="enterproducts" method="post" enctype="multipart/form-data">
 <%-- <form:errors path="*" cssClass="error" /> --%>
 <div align="center">
 <table>
@@ -48,7 +48,7 @@
                  <td><input type="file" name="images" multiple="multiple"/></td>
             </tr>
             <tr>
-                <td colspan="3"><input type="submit" value="Add Product"/></td>
+                <td colspan="3"><input type="submit" value="Add Products"/></td>
             </tr>
         </table>
 

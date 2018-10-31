@@ -45,7 +45,7 @@ public class EnterNewProductController {
         //Validation code start
         boolean error = false;
          
-        System.out.println(product); //Verifying if information is same as input by user
+        System.out.println(product.getImages()); //Verifying if information is same as input by user
          
         if(product.getId().isEmpty()){
             result.rejectValue("id", "error.emptyID");
@@ -80,12 +80,14 @@ public class EnterNewProductController {
             for (MultipartFile multipartFile : files) {
  
                 String fileName = multipartFile.getOriginalFilename();
+                System.out.println("filename: " + fileName);
                 fileNames.add(fileName);
-                for(String filename : fileNames) {
-                	product.getImagesnames().concat(fileName);
-                	product.getImagesnames().concat(";");
+                product.setImagesnames("");
+                for(String thisFilename : fileNames) {
+                	System.out.println("Adding " + thisFilename + " to imagesNames");
+                	product.setImagesnames(product.getImagesnames().concat(thisFilename));
                 }
-                System.out.println("Productos: " + product.getImagesnames());
+                System.out.println("Nombres de Productos: " + product.getImagesnames());
  
                 @SuppressWarnings("deprecation")
 				File imageFile = new File(servletRequest.getRealPath("/images"), fileName);
@@ -104,6 +106,7 @@ public class EnterNewProductController {
         
         status.setComplete();
         productManagementService.insertProduct(product);
+        
         return "redirect:enterproducts";
         // mensaje de OK
         

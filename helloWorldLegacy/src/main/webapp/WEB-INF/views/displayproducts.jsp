@@ -20,9 +20,8 @@
 				<td>${product.id }</td>
 				<td>${product.name }</td>
 				<td>${product.price }</td>
-				<td>
-				<img src="${pageContext.request.contextPath }/displayproducts/barcode/${product.id }" width="200" height="50">
-				</td>
+				<td><img src="${pageContext.request.contextPath }/displayproducts/barcode/${product.id }" width="200" height="50"></td>
+				<td><img src="${product.imagesnames }"></td>
 				<td align="center">
 					<a href="${pageContext.request.contextPath }/cart/add/${product.id}">Add to Cart</a>
 				</td>

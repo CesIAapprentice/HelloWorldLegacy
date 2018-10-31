@@ -1,5 +1,6 @@
 package net.java.spring.dao;
 
+import java.io.File;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.web.multipart.MultipartFile;
 
 import net.java.spring.model.EnterNewProductBean;
 import net.java.spring.model.LoginBean;
@@ -78,6 +80,7 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 					temp.setId(rs.getString(1));
 					temp.setName(rs.getString(2));
 					temp.setPrice(rs.getInt(3));
+					temp.setImagesnames("/images/" + rs.getString(4));
 					productList.add(temp);
 					
 				}

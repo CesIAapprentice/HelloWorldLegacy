@@ -17,7 +17,14 @@ public class Product implements Serializable{
 	private Integer price;
 	private List<MultipartFile> images;
 	private String imagesnames;
-
+	
+	public Product() {
+		this.id = "";
+		this.name = "";
+		this.price = 0;
+		this.images = new ArrayList<MultipartFile>();
+		this.imagesnames = "";
+	}
 
 	public String getId() {
 		return id;
