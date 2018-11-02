@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -37,8 +38,9 @@ public class EnterNewProductController {
          return "enterproducts";
     }
 	
+	@SuppressWarnings("deprecation")
 	@RequestMapping(value="enterproducts", method = RequestMethod.POST)
-	public String submitForm(@ModelAttribute("product") Product product, BindingResult result, SessionStatus status, HttpServletRequest servletRequest, Model model) throws SQLException
+	public String submitForm(@ModelAttribute("product") Product product, BindingResult result, SessionStatus status, HttpServletRequest servletRequest, ServletContext servletContext, Model model) throws SQLException
     {
 		this.productManagementService = new ProductManagementServiceImplement();
 
@@ -89,10 +91,12 @@ public class EnterNewProductController {
                 }
                 System.out.println("Nombres de Productos: " + product.getImagesnames());
  
-                @SuppressWarnings("deprecation")
-				File imageFile = new File(servletRequest.getRealPath("/images"), fileName);
+                File imageFile = new File(servletContext.getRealPath("/images"), fileName);
+                System.out.println("hola");
+                System.out.println("Image Path: " + imageFile.getAbsolutePath());
                 try
                 {
+                	System.out.println("Image Path: " + imageFile.getAbsolutePath());
                     multipartFile.transferTo(imageFile);
                 } catch (IOException e)
                 {
