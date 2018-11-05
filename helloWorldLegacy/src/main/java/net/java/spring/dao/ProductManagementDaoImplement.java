@@ -80,7 +80,9 @@ public class ProductManagementDaoImplement implements ProductManagementDao{
 					temp.setId(rs.getString(1));
 					temp.setName(rs.getString(2));
 					temp.setPrice(rs.getInt(3));
-					temp.setImagesnames("/images/" + rs.getString(4));
+					//temp.setImagesnames("/images/" + rs.getString(4));
+					temp.setImagesnames( rs.getString(4));
+					
 					productList.add(temp);
 					
 				}
