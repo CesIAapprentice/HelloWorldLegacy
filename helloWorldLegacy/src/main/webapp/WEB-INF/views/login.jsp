@@ -2,6 +2,8 @@
 pageEncoding="UTF-8"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ page session="false"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,16 +17,17 @@ pageEncoding="UTF-8"%>
 <div align="center">
 <table>
 <tr>
-<td><label >User Name</label></td>
+<td><label ><strong><spring:message	code="label.firstName" /></strong></label></td>
 <td><input type="text" name="username" /></td>
 </tr>
 <tr>
-<td><label >Password</label></td>
+<td><label ><strong><spring:message	code="label.lastName" /></strong></label></td>
 <td><input type="password" name="password" /></td>
 </tr>
 <tr>
 <td></td>
-<td><input type="submit" value="Submit" /></td>
+<spring:message code="label.submit" var="labelSubmit"></spring:message>
+<td><input type="submit" value="${labelSubmit}" /></td>
 </tr>
 </table>
 <div style="color: red">${loginError}</div>
